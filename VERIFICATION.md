@@ -1,3 +1,7 @@
+## 手機首頁按鈕修正
+
+700px 以下隱藏 Hero 的 Meet the collection 大按鈕，保留頂部 The collection 導覽。已於 390×844 確認大按鈕不可見、頂部入口可見，並視覺確認影片不再被按鈕遮擋；1440×900 電腦版按鈕仍可見。CSS 快取版本更新為 v10。
+
 ## 第二節固定展示修訂
 產品改為固定尺寸及位置，取消 scroll scale / rotate / translate；桌面以 Grid 對齊產品、文字及 CTA，保留文字淡入淡出，捲動區縮至 230svh。手機與矮螢幕採正常內容流，依次顯示全部介紹。
 已實測 1440×900、390×844 排版，產品 transform=none，無橫向 overflow；手機三段介紹均無 aria-hidden，console 無錯誤。動畫及開頁位置回歸測試通過。第一屏影片未修改。

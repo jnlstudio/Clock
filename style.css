@@ -114,3 +114,5 @@ header{border-bottom:0;color:#283b32}
  .product-story .story-beat>p:last-child{font-size:12px;max-width:38ch}
  .product-story .story-photo{grid-column:1;grid-row:4}
 }
+/* Mobile already has collection navigation; keep the film free of a duplicate CTA. */
+@media(max-width:700px){.hero-copy>.text-link{display:none}}
