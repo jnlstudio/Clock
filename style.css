@@ -75,3 +75,11 @@ header{border-bottom:0;color:#283b32}
  .hero h1{font-size:50px}.hero .intro{font-size:12px}.hero .text-link{margin-top:12px}
 }
 @media(min-width:701px) and (max-width:1050px) and (orientation:portrait){.hero .hero-media picture,.hero .hero-media video,.hero .hero-media img{object-fit:cover;object-position:center}}
+
+/* Native scroll holds the desktop film, then releases into the existing story. */
+.scroll-film .film-journey{height:300svh;position:relative}
+.scroll-film .film-journey .hero{position:sticky;top:0;height:100svh;min-height:0}
+@media(prefers-reduced-motion:reduce){.scroll-film .film-journey{height:auto}.scroll-film .film-journey .hero{position:relative}}
+.scroll-film .hero-copy{max-width:28%}
+.scroll-film .hero h1{font-size:clamp(36px,3.7vw,60px)}
+.scroll-film .hero .intro{font-size:12px}

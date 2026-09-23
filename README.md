@@ -22,11 +22,19 @@ JNL Studio 現有產品網站的視覺與動畫升級。保留英文品牌內容
 - Footer 的 Pause motion 可停用影片及捲動動畫；系統 reduced-motion 優先，完整顯示所有產品說明。
 - 影片離開視野、分頁隱藏或開啟圖片 dialog 時暫停；回到畫面恢復。
 
-## 影片來源與限制
+## 電腦版捲動影片（最新）
+
+電腦版已換成使用者提供的 v3clockvideo.mp4，輸出 scroll-desktop.mp4（10 秒、1280×720、24fps、每 6 格關鍵格，移除音訊）。首次停留第一格，原生捲動進度控制影片時間；300svh 容器內固定一屏，推進至最後一格後自然離開。向上捲動可回看，沒有 wheel 攔截或強迫跳頁。為跨瀏覽器 seek 相容性，此影片使用 H.264 MP4。
+
+手機及直向平板仍用原有正常循環影片。Reduced motion／Pause motion 會取消長捲動區及影片推進，保留完整內容。
+
+部署請包含新的 scroll-desktop.mp4、scroll-desktop-poster.jpg 及三個程式檔。
+
+## 手機影片來源與限制
 
 原始 `clock-desktop.mp4`、`clock-mobile.mp4` 完整保留，未覆寫。
 
-目前使用 `normal-desktop.*` / `normal-mobile.*`：24fps、1×正常順向播放，取消短片段放慢及正反循環。原片頭尾約半秒交疊，輸出每輪 9.5 秒；以原生 loop 播放，沒有 JavaScript 逐格 seek。WebM VP9 優先、MP4 H.264 備援，提供 JPG poster。
+手機目前使用 `normal-mobile.*`：24fps、1×正常順向播放，取消短片段放慢及正反循環。原片頭尾約半秒交疊，輸出每輪 9.5 秒；以原生 loop 播放，沒有 JavaScript 逐格 seek。WebM VP9 優先、MP4 H.264 備援，提供 JPG poster。
 
 保留現有桌面裁切及手機留白構圖。完整原片本來有燒入英文文字／圖形，部分鏡頭仍可見，可能與 HTML 文字重疊。要同時保留完整鏡頭、正常速度及完全無字背景，需要供應無字幕原片；本次未聲稱移除原片字幕。
 

@@ -1,3 +1,14 @@
+# 捲動影片最新驗證
+
+- 電腦 1440×900：首次 currentTime=0、paused=true。向下捲動中段 currentTime=6.060752，Hero top=0；停止捲動後時間不變。越過播放區後 currentTime=9.958333，下一節進入畫面。
+- 桌面無橫向 overflow、觀察到 CLS=0、console error/warning 為空。
+- 手機 390×844：normal-mobile.webm、loop=true，scroll-film=false，無橫向 overflow。
+- JavaScript 語法及模擬測試通過：初始停格、中段／尾格 seek、reduced-motion、暫停恢復、素材切換及故事字幕。
+- 靜態網站無需 build。保留原有款式選擇、圖片 dialog、FAQ、複製功能程式。
+- 實體裝置／Safari seek 效能未實測。尚未部署 GitHub。
+
+以下為歷史記錄，桌面正常循環已由捲動播放取代。
+
 # 最新播放修訂驗證（2026-09-23）
 
 - 使用原片正常 1× 順向播放，頭尾約半秒交疊；沒有放慢、倒播或 scroll seeking。

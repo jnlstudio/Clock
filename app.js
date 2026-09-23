@@ -57,18 +57,31 @@
     }
   });
 
-  // One media element, no seek-on-scroll and no network request for the unused format.
+  // Desktop follows native scroll; mobile retains normal loop playback.
   const video = $('#opening-video');
   const media = $('.hero-media');
   const toggle = $('#motion-toggle');
   let manualPause = false, inView = true, mediaKey = '', revision = 0;
   let fallbackUsed = false, playPending = false;
   const motionOff = () => reduced.matches || manualPause;
+  const desktopFilm = () => !mobile.matches && !portraitFilm.matches;
+  const scrollFilm = () => desktopFilm() && !motionOff();
+  let targetTime = 0;
+  function seekFilm() {
+    if (!scrollFilm() || document.hidden || dialog.open || video.readyState < 2 || video.seeking) return;
+    if (Math.abs(video.currentTime - targetTime) > 1 / 48) video.currentTime = targetTime;
+  }
+  video.addEventListener('seeked', seekFilm);
+  video.addEventListener('loadeddata', () => {
+    if (desktopFilm() && !motionOff()) media.classList.add('is-playing');
+    schedule();
+  });
   video.muted = true;
   video.defaultMuted = true;
   function syncVideo() {
     if (motionOff() || !inView || document.hidden || dialog.open) { video.pause(); return; }
     if (!video.currentSrc && !video.src) loadMedia();
+    if (desktopFilm()) { video.pause(); schedule(); return; }
     if (playPending || !video.paused) return;
     const token = revision;
     playPending = true;
@@ -83,7 +96,7 @@
   }
   function loadMedia() {
     const kind = (mobile.matches || portraitFilm.matches) ? 'mobile' : 'desktop';
-    const format = video.canPlayType('video/webm; codecs="vp9"') ? 'webm' : 'mp4';
+    const format = desktopFilm() ? 'mp4' : (video.canPlayType('video/webm; codecs="vp9"') ? 'webm' : 'mp4');
     const key = `${kind}.${format}`;
     if (key === mediaKey) return;
     mediaKey = key;
@@ -91,8 +104,12 @@
     fallbackUsed = false;
     media.classList.remove('is-playing');
     video.pause();
-    video.poster = `assets/normal-${kind}-poster.jpg`;
-    video.src = `assets/normal-${key}`;
+    video.autoplay = !desktopFilm();
+    video.loop = !desktopFilm();
+    video.preload = desktopFilm() ? 'auto' : 'metadata';
+    targetTime = 0;
+    video.poster = desktopFilm() ? 'assets/scroll-desktop-poster.jpg' : 'assets/normal-mobile-poster.jpg';
+    video.src = desktopFilm() ? 'assets/scroll-desktop.mp4' : `assets/normal-${key}`;
     video.load();
   }
   let previousVideoTime = 0, loopCount = 0;
@@ -117,13 +134,14 @@
   new MutationObserver(syncVideo).observe(dialog, { attributes: true, attributeFilter: ['open'] });
 
   // Native scroll drives transform/opacity only. Geometry is cached on resize.
+  const journey = $('.film-journey');
   const story = $('#details'), stage = $('.story-stage'), product = $('.story-product');
   const beats = $$('.story-beat'), heroCopy = $('.hero-copy'), heading = $('.story-heading');
   const clamp = value => Math.max(0, Math.min(1, value));
   const smooth = value => { const x = clamp(value); return x * x * (3 - 2 * x); };
   let geometry, frame = 0;
   function measure() {
-    geometry = { top: story.getBoundingClientRect().top + scrollY, distance: Math.max(1, story.offsetHeight - stage.offsetHeight), heroHeight: $('#top').offsetHeight };
+    geometry = { filmTop: journey.getBoundingClientRect().top + scrollY, filmDistance: Math.max(1, journey.offsetHeight - $('#top').offsetHeight), top: story.getBoundingClientRect().top + scrollY, distance: Math.max(1, story.offsetHeight - stage.offsetHeight), heroHeight: $('#top').offsetHeight };
     schedule();
   }
   function resetStory() {
@@ -132,10 +150,18 @@
   }
   function render() {
     frame = 0;
-    if (motionOff() || short.matches || !geometry) return;
-    const heroP = clamp(scrollY / geometry.heroHeight);
+    if (motionOff() || !geometry) return;
+    if (desktopFilm()) {
+      const progress = clamp((scrollY - geometry.filmTop) / geometry.filmDistance);
+      if (Number.isFinite(video.duration)) {
+        targetTime = progress * Math.max(0, video.duration - 1 / 24);
+        seekFilm();
+      }
+    }
+    if (short.matches) return;
+    const heroP = desktopFilm() ? clamp((scrollY - geometry.filmTop) / (geometry.filmDistance * .3)) : clamp(scrollY / geometry.heroHeight);
     heroCopy.style.transform = `translate3d(0,${-heroP * (mobile.matches ? 12 : 40)}px,0)`;
-    heroCopy.style.opacity = String(1 - smooth(heroP) * .9);
+    heroCopy.style.opacity = String(1 - smooth(heroP) * (desktopFilm() ? 1 : .9));
     media.style.transform = 'none';
     const p = clamp((scrollY - geometry.top) / geometry.distance);
     // Enlarge, move to the detail, then return to the whole object before release.
@@ -158,6 +184,7 @@
   function applyMotion() {
     const enabled = !motionOff() && !short.matches;
     document.body.classList.toggle('motion', enabled);
+    document.body.classList.toggle('scroll-film', scrollFilm());
     toggle.textContent = reduced.matches ? 'Reduced motion enabled' : (motionOff() ? 'Resume motion' : 'Pause motion');
     toggle.setAttribute('aria-pressed', String(motionOff()));
     if (!enabled) resetStory();
@@ -179,7 +206,7 @@
   reduced.addEventListener('change', applyMotion);
   mobile.addEventListener('change', () => { if (!motionOff()) loadMedia(); applyMotion(); });
   short.addEventListener('change', applyMotion);
-  portraitFilm.addEventListener('change', () => { if (!motionOff()) { loadMedia(); syncVideo(); } });
+  portraitFilm.addEventListener('change', applyMotion);
   addEventListener('scroll', schedule, { passive: true });
   addEventListener('resize', measure, { passive: true });
   new ResizeObserver(measure).observe(story);
