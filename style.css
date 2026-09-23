@@ -23,3 +23,55 @@
 /* Feather the footage edges into the same stage; no visible video rectangle. */
 .hero-media:after{background:linear-gradient(90deg,var(--bg),transparent 12%,transparent 88%,var(--bg)),linear-gradient(0deg,var(--bg),transparent 15%,transparent 85%,var(--bg))}
 @media(max-width:700px){.hero-media:after{background:linear-gradient(90deg,var(--bg),transparent 9%,transparent 91%,var(--bg)),linear-gradient(0deg,var(--bg),transparent 28%,transparent 84%,var(--bg))}}
+
+/* Full scene direction: opaque footage across the entire hero, no masks or feathering. */
+:root{--bg:#e9e2d4;--ink:#283b32;--muted:#536154;--line:#283b3233;--accent:#775c37;color-scheme:light}
+header{border-bottom:0;color:#283b32}
+.hero{background:#e6ddca;min-height:680px;align-items:center}
+.hero .hero-media{inset:0;width:100%;height:100%;mask-image:none;-webkit-mask-image:none;transform:none!important}
+.hero .hero-media:before,.hero .hero-media:after{display:none;content:none}
+.hero .hero-media picture,.hero .hero-media video,.hero .hero-media img{width:100%;height:100%;object-fit:cover;object-position:right center}
+.hero .hero-media video{transition:none}
+.hero-copy{max-width:39%;text-shadow:none}
+.hero h1{font-family:Georgia,'Times New Roman',serif;font-size:clamp(46px,4.9vw,76px);line-height:1.06;font-weight:400;letter-spacing:-.035em;margin:24px 0}
+.hero h1 em{color:inherit;font-style:normal}
+.hero .eyebrow,.hero .intro,.hero-bottom,.header-note{color:#34473b}
+.hero .intro{font-size:13px;line-height:1.8}
+.hero .text-link{background:#283b32;color:#fffaf0;border:0;padding:15px 23px;min-height:52px;font-size:12px;gap:34px;margin-top:28px}
+.hero-bottom{font-size:8px}.hero-bottom a{color:#283b32}
+.product-story{background:var(--bg)}
+.zoom{background:#283b32;color:#fffaf0}
+.button{border-color:#775c3780}.button:hover{background:#283b3209}
+@media(min-width:701px) and (max-width:1050px){.hero-copy{max-width:39%}.hero h1{font-size:clamp(43px,5.3vw,56px)}}
+@media(min-width:701px) and (max-width:1050px) and (orientation:portrait){
+ .hero{align-items:flex-start;padding-top:145px}.hero-copy{max-width:70%}.hero h1{font-size:62px}
+ .hero .hero-media picture,.hero .hero-media video,.hero .hero-media img{object-position:82% center}
+}
+@media(max-width:700px){
+ header{height:76px}.hero{min-height:740px;align-items:flex-end;padding-bottom:105px}
+ .hero-copy{max-width:100%;color:#fffaf0;text-shadow:0 1px 8px #0006}
+ .hero h1{font-size:clamp(43px,12vw,60px);margin:18px 0}.hero .intro,.hero .eyebrow{color:#fffaf0}
+ .hero .hero-media picture,.hero .hero-media video,.hero .hero-media img{object-position:center;filter:brightness(.62)}
+ header{color:#fffaf0}.nav-cta{border-color:#fffaf080}.hero-bottom,.hero-bottom a{color:#fffaf0}.hero .text-link{background:#fffaf0;color:#283b32;text-shadow:none}
+}
+@media(max-width:700px){
+ .hero{align-items:flex-start;padding-top:105px;padding-bottom:80px}
+ header{color:#283b32}.nav-cta{border-color:#283b3280}
+ .hero-copy{color:#283b32;text-shadow:none;max-width:100%}
+ .hero h1{font-size:clamp(38px,10.8vw,46px);margin:14px 0}
+ .hero .eyebrow,.hero .intro,.hero-bottom,.hero-bottom a{color:#34473b}
+ .hero .intro{font-size:11px;line-height:1.6}
+ .hero .text-link{margin-top:15px;min-height:44px;padding:12px 18px;background:#283b32;color:#fffaf0}
+ .hero .hero-media picture,.hero .hero-media video,.hero .hero-media img{filter:none;object-position:center center}
+}
+@media(min-width:701px) and (max-width:1050px) and (orientation:portrait){
+ .hero{padding-top:135px}.hero .hero-media picture,.hero .hero-media video,.hero .hero-media img{object-position:center;object-fit:cover}
+ .hero-copy{max-width:70%}.hero h1{font-size:54px;margin:18px 0}.hero .text-link{margin-top:18px}
+}
+@media(max-width:700px){.hero-bottom{bottom:4px}.hero-bottom>span{display:none}.hero-bottom>a{margin-left:auto;min-height:32px;font-size:8px}}
+@media(min-width:701px) and (max-width:1050px) and (orientation:portrait){
+ .hero{background:#e7dece}.hero .hero-media{background:#e7dece}
+ .hero .hero-media picture,.hero .hero-media video,.hero .hero-media img{object-fit:contain;object-position:center}
+ .hero h1{font-size:50px}.hero .intro{font-size:12px}.hero .text-link{margin-top:12px}
+}
+@media(min-width:701px) and (max-width:1050px) and (orientation:portrait){.hero .hero-media picture,.hero .hero-media video,.hero .hero-media img{object-fit:cover;object-position:center}}

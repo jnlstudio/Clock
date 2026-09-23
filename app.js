@@ -4,6 +4,7 @@
   const $$ = selector => [...document.querySelectorAll(selector)];
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const mobile = matchMedia('(max-width: 700px)');
+  const portraitFilm = matchMedia('(max-width: 1050px) and (orientation: portrait)');
   const short = matchMedia('(max-height: 650px) and (min-width: 701px)');
   const designs = {
     square: { name: 'The Square', file: 'assets/square-clock.png', caption: '01 / THE SQUARE' },
@@ -81,7 +82,7 @@
     }).finally(() => { playPending = false; });
   }
   function loadMedia() {
-    const kind = mobile.matches ? 'mobile' : 'desktop';
+    const kind = (mobile.matches || portraitFilm.matches) ? 'mobile' : 'desktop';
     const format = video.canPlayType('video/webm; codecs="vp9"') ? 'webm' : 'mp4';
     const key = `${kind}.${format}`;
     if (key === mediaKey) return;
@@ -90,8 +91,8 @@
     fallbackUsed = false;
     media.classList.remove('is-playing');
     video.pause();
-    video.poster = `assets/hero-${kind}-poster.jpg`;
-    video.src = `assets/hero-${key}`;
+    video.poster = `assets/scene-${kind}-poster.jpg`;
+    video.src = `assets/scene-${key}`;
     video.load();
   }
   let previousVideoTime = 0, loopCount = 0;
@@ -135,7 +136,7 @@
     const heroP = clamp(scrollY / geometry.heroHeight);
     heroCopy.style.transform = `translate3d(0,${-heroP * (mobile.matches ? 12 : 40)}px,0)`;
     heroCopy.style.opacity = String(1 - smooth(heroP) * .9);
-    media.style.transform = `translate3d(0,${heroP * (mobile.matches ? 6 : 25)}px,0) scale(${1 + heroP * .035})`;
+    media.style.transform = 'none';
     const p = clamp((scrollY - geometry.top) / geometry.distance);
     // Enlarge, move to the detail, then return to the whole object before release.
     const rise = smooth(p / .55), returnToWhole = smooth((p - .73) / .27);
@@ -178,6 +179,7 @@
   reduced.addEventListener('change', applyMotion);
   mobile.addEventListener('change', () => { if (!motionOff()) loadMedia(); applyMotion(); });
   short.addEventListener('change', applyMotion);
+  portraitFilm.addEventListener('change', () => { if (!motionOff()) { loadMedia(); syncVideo(); } });
   addEventListener('scroll', schedule, { passive: true });
   addEventListener('resize', measure, { passive: true });
   new ResizeObserver(measure).observe(story);
