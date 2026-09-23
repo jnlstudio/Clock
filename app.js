@@ -109,8 +109,8 @@
     video.loop = !desktopFilm();
     video.preload = desktopFilm() ? 'auto' : 'metadata';
     targetTime = 0;
-    video.poster = desktopFilm() ? 'assets/scroll-desktop-poster.jpg' : (mobile.matches ? 'assets/full-mobile-poster.jpg' : 'assets/normal-mobile-poster.jpg');
-    video.src = desktopFilm() ? 'assets/scroll-desktop.mp4' : `assets/${mobile.matches ? 'full' : 'normal'}-${key}`;
+    video.poster = desktopFilm() ? 'assets/scroll-desktop-poster.jpg' : 'assets/full-mobile-poster.jpg';
+    video.src = desktopFilm() ? 'assets/scroll-desktop.mp4' : `assets/full-${key}`;
     video.load();
   }
   let previousVideoTime = 0, loopCount = 0;

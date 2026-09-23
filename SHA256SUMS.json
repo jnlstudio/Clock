@@ -1,7 +1,7 @@
 {
   "README.md": "5ce49970770e4b57ec65cb9078fccc418e683937a75a7224da8644843441674c",
-  "VERIFICATION.md": "c7b39d916b2ffc3dbe7132feef1c209adb321cdfb7fed5d8f219174762e12827",
-  "app.js": "f53b4ac7650c0a92ff27f184d0ecc0ed98fb9fc32491a8b93a584c1184985024",
+  "VERIFICATION.md": "cb12b3760443d30765b7aa6d16536fe80de9bf02630423dd6f5137f8362f1dbb",
+  "app.js": "b0c6f221157d8d8ac091e7aab3e876000dbc82a0a95aedb7e6ebe6dfd8a790fb",
   "assets/clock-desktop.mp4": "42232268996f5cac8713b957636cd188a08f840d9b2a7dd2b2dfe8137d3543b8",
   "assets/clock-mobile.mp4": "61b9ed56c4f19f33886c0dc2a07c1d41fc1cd6c25f16d6139cb4a30c76f60a36",
   "assets/favicon.svg": "8bb02d613dd216ed8e118f9a9273bb80ebe8b1914f1d6d2fe222c438a243c0f4",
@@ -31,6 +31,6 @@
   "assets/scroll-desktop.mp4": "cdf9b8bbc19a1266c9cca6c448ef92c69aeecd346f2551fc16fb2b295708ef64",
   "assets/square-clock.png": "593ae29b610418684074ccc63b26e9e5815fde4dff710b688f4641d96756f625",
   "entry.js": "6bfaadecc9d2f0870755459427a0d93c31a695a43f0f7f4d837e8063d2815a32",
-  "index.html": "4c36621e3289a28dca3428eeaddb56f0e637fddd3965fe9ab8c3ba3d54461f62",
-  "style.css": "d4df9aada2a80e1c02d4560e3b10da20b7130042fb6c62261556500389d638c2"
+  "index.html": "be7bc7cbb6f444a3a7d9affd9c8db495e88019b38caad99e096c0702947b58f5",
+  "style.css": "a34a43a332b1a3f13ba9036e226738e5aafd65bfa35bc8f707568a32436ed185"
 }

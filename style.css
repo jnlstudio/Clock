@@ -157,3 +157,26 @@ header{border-bottom:0;color:#283b32}
  .hero .text-link{text-shadow:none}
 }
 @media(min-width:701px) and (prefers-contrast:more){header,.header-note,.hero-copy,.hero .eyebrow,.hero h1,.hero .intro,.hero-bottom a{color:#4d330e;text-shadow:none}}
+/* Portrait tablets share the clean full-frame film, with their own type scale. */
+@media(min-width:701px) and (max-width:1050px) and (orientation:portrait){
+ .hero{height:100svh;min-height:600px;padding:110px var(--gutter) 80px;align-items:flex-start;background:#e9e2d4}
+ .hero .hero-media{inset:0;width:100%;height:100%;opacity:1;mask:none;-webkit-mask:none}
+ .hero .hero-media:before,.hero .hero-media:after{display:none}
+ .hero .hero-media video,.hero .hero-media img{object-fit:cover;object-position:49% center;filter:none;mask:none;-webkit-mask:none}
+ .hero-copy{position:static;max-width:100%;transform:none!important;opacity:1!important}
+ .hero-copy>.eyebrow{font-size:8px;letter-spacing:1.5px}
+ .hero h1{font-size:clamp(32px,4.1vw,42px);line-height:1.05;margin:10px 0;letter-spacing:-.025em}
+ .hero .intro{position:absolute;left:var(--gutter);right:var(--gutter);bottom:76px;font-size:12px;line-height:1.7}
+ .hero-copy>.text-link{display:none}
+ .hero-bottom{bottom:20px}
+ .hero-bottom>span{display:none}
+ .hero-bottom a{margin-left:auto}
+}
+/* Touch tablets in landscape retain the wide film, with navigation as the CTA. */
+@media(min-width:701px) and (max-width:1400px) and (orientation:landscape) and (pointer:coarse){.hero-copy>.text-link{display:none}}
+@media(min-width:701px) and (max-width:1400px) and (orientation:landscape) and (pointer:coarse){
+ .hero{align-items:flex-start;padding-top:100px}
+ .scroll-film .hero-copy{position:static;max-width:100%;transform:none!important}
+ .scroll-film .hero h1{font-size:32px;margin:10px 0}
+ .hero .intro{position:absolute;left:var(--gutter);bottom:76px;font-size:12px}
+}
