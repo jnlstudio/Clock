@@ -131,3 +131,17 @@ header{border-bottom:0;color:#283b32}
  .hero-copy>.text-link{display:none}
 }
 @media(max-width:700px){.hero{padding-top:84px}.hero-copy{transform:none!important;opacity:1!important}.hero h1{font-size:clamp(26px,7vw,31px)}}
+/* Antique gold stays legible on the warm scene without a dark video overlay. */
+@media(max-width:700px){
+ header,.hero-copy,.hero .eyebrow,.hero .intro,.hero-bottom,.hero-bottom a{color:#684716}
+ header,.hero-copy>.eyebrow,.hero h1,.hero .intro,.hero-bottom a{text-shadow:0 1px 1px #fff8e5b3}
+ header .brand span{border-color:#68471655}
+ header .nav-cta{border-color:#68471688}
+ .hero{padding-top:76px}
+ .hero-copy>.eyebrow{font-size:7px;letter-spacing:1.5px}
+ .hero h1{color:#78521d;font-size:clamp(25px,6.7vw,30px);line-height:1.05;margin:8px 0;font-weight:400;letter-spacing:-.025em}
+ .hero h1 em{color:inherit}
+ .hero .intro{bottom:62px;font-weight:500}
+ .hero-bottom{bottom:12px}
+}
+@media(max-width:700px) and (prefers-contrast:more){header,.hero-copy,.hero .eyebrow,.hero h1,.hero .intro,.hero-bottom a{color:#4d330e;text-shadow:none}}
