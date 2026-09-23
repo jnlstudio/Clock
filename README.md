@@ -1,3 +1,11 @@
+## 開頁位置修正
+
+新增 entry.js，在 HTML 解析前取消入口 hash 並停用瀏覽器捲動位置恢復。重新開頁／刷新及快取返回都從頂部開始；頁內導覽維持正常，載入中已開始的使用者操作不會被 pageshow 重設。
+
+已實測桌面 1440×900：#details 頁內導覽正常，刷新後 hash 清空、scrollY=0、影片 time=0 且暫停。手機 390×844 帶 #details 開頁亦為 scrollY=0，使用原手機影片。Console 無 error/warning。入口回歸與動畫回歸測試通過。
+
+部署必須包含新 entry.js 及更新 index.html。網站尚未自動發布。
+
 # Tile Time — Cinematic Product Experience
 
 JNL Studio 現有產品網站的視覺與動畫升級。保留英文品牌內容、方形／圓形產品介紹、款式切換、圖片放大、複製資料及 FAQ。未加入未確認的價格、物料規格或交易功能。
