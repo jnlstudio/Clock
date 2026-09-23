@@ -91,8 +91,8 @@
     fallbackUsed = false;
     media.classList.remove('is-playing');
     video.pause();
-    video.poster = `assets/scene-${kind}-poster.jpg`;
-    video.src = `assets/scene-${key}`;
+    video.poster = `assets/normal-${kind}-poster.jpg`;
+    video.src = `assets/normal-${key}`;
     video.load();
   }
   let previousVideoTime = 0, loopCount = 0;

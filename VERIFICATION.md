@@ -1,3 +1,19 @@
+# 最新播放修訂驗證（2026-09-23）
+
+- 使用原片正常 1× 順向播放，頭尾約半秒交疊；沒有放慢、倒播或 scroll seeking。
+- 四個新影片為 228 frames / 24fps / 9.5 秒，完整解碼，沒有黑格。
+- 瀏覽器桌面及 390×844 手機確認使用 normal-desktop / normal-mobile WebM，playbackRate=1、paused=false、loop 多次增加。
+- 兩尺寸檢查無橫向 overflow，觀察到 CLS=0；console error / warning 為空。
+- JavaScript 語法通過。模擬回歸：reduced-motion、Pause/Resume、WebM→MP4、錯誤 poster、手機選片、story captions 不疊字全部通過。
+- 保留 CSS 排版與原有產品功能。既有功能驗證記錄見下方歷史記錄。
+- 原片內嵌字幕仍可見，是已知素材限制；無字完整背景需求尚需無字幕版本原片。
+- 此次未量測真機掉幀、Safari 或慢網絡。瀏覽器測試工具未提供可讀取的 getVideoPlaybackQuality 方法，不能聲稱掉幀為零。
+- 本機及 ZIP 已更新，未發布 GitHub。
+
+---
+
+以下為前版歷史驗證，當中的 4.5 秒／正反影片數據已由上述 9.5 秒正常播放版本取代。
+
 # 驗證記錄 — 2026-09-23
 
 ## 專案狀態
