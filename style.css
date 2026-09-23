@@ -116,3 +116,18 @@ header{border-bottom:0;color:#283b32}
 }
 /* Mobile already has collection navigation; keep the film free of a duplicate CTA. */
 @media(max-width:700px){.hero-copy>.text-link{display:none}}
+/* Full-frame mobile cinema: real scene from edge to edge, no padded film. */
+@media(max-width:700px){
+ .hero{height:100svh;min-height:600px;padding:94px 24px 70px;background:#e9e2d4}
+ .hero .hero-media{inset:0;width:100%;height:100%;mask:none;-webkit-mask:none;opacity:1}
+ .hero .hero-media:before,.hero .hero-media:after{display:none}
+ .hero .hero-media video,.hero .hero-media img{object-fit:cover;object-position:49% center;filter:none;mask:none;-webkit-mask:none}
+ .hero-copy{position:static;max-width:100%;color:#283b32;text-shadow:none}
+ .hero-copy>.eyebrow{font-size:7px;letter-spacing:1.6px}
+ .hero h1{font-family:Georgia,'Times New Roman',serif;font-size:clamp(27px,7.4vw,34px);line-height:1.06;margin:10px 0}
+ .hero .intro{position:absolute;left:24px;bottom:74px;right:24px;font-size:11px;color:#283b32;line-height:1.6}
+ .hero-bottom{bottom:20px}
+ .hero-bottom a{font-size:9px;color:#283b32}
+ .hero-copy>.text-link{display:none}
+}
+@media(max-width:700px){.hero{padding-top:84px}.hero-copy{transform:none!important;opacity:1!important}.hero h1{font-size:clamp(26px,7vw,31px)}}

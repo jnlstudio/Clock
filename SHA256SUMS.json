@@ -1,10 +1,13 @@
 {
   "README.md": "5ce49970770e4b57ec65cb9078fccc418e683937a75a7224da8644843441674c",
-  "VERIFICATION.md": "66249176c32ecda78dfffbfe907f22cf3ff485828b8dff4e7e22e254fff431a5",
-  "app.js": "f08f1fbe6f834e29d9e7560b2a000449b2512730af4f9a2dc6fad84b53ea885f",
+  "VERIFICATION.md": "a3ab22dd7f7c6f0d40092d4e8c23937b581a50e72c3c6b4dac051c217a198619",
+  "app.js": "f53b4ac7650c0a92ff27f184d0ecc0ed98fb9fc32491a8b93a584c1184985024",
   "assets/clock-desktop.mp4": "42232268996f5cac8713b957636cd188a08f840d9b2a7dd2b2dfe8137d3543b8",
   "assets/clock-mobile.mp4": "61b9ed56c4f19f33886c0dc2a07c1d41fc1cd6c25f16d6139cb4a30c76f60a36",
   "assets/favicon.svg": "8bb02d613dd216ed8e118f9a9273bb80ebe8b1914f1d6d2fe222c438a243c0f4",
+  "assets/full-mobile-poster.jpg": "5e766f80e39d16274d6d47382c1d01dc86eda0ce4f6cec983b922fca6346f5c9",
+  "assets/full-mobile.mp4": "b6067bfbb877fefec48e1bc181b993c950519b99df742a871cb38677c12b5d1b",
+  "assets/full-mobile.webm": "f9ddad75d28b166b082727b12eb687d3a9e16a796cd8724c55c9726abdee570f",
   "assets/hero-desktop-poster.jpg": "30ae0577956d8ba883da0516b987d40f97646fb8b650e55d564c990fa52d2fa0",
   "assets/hero-desktop.mp4": "bd859652b6b2f267c6d3ab46ae37594904ca6c8e85f1ef6de90f286f7e5283e9",
   "assets/hero-desktop.webm": "f662e754f94e9152f177d06db23459f8d09ad0f5c14bbab7c669d22aba04e020",
@@ -28,6 +31,6 @@
   "assets/scroll-desktop.mp4": "cdf9b8bbc19a1266c9cca6c448ef92c69aeecd346f2551fc16fb2b295708ef64",
   "assets/square-clock.png": "593ae29b610418684074ccc63b26e9e5815fde4dff710b688f4641d96756f625",
   "entry.js": "6bfaadecc9d2f0870755459427a0d93c31a695a43f0f7f4d837e8063d2815a32",
-  "index.html": "7c4188452318f25da9c6e400b3d012ea09c1d88c8f0349ef022b2cc6ed763f92",
-  "style.css": "62b7a3327f2edb163f0791a5ffa0a2283bdb6ac357cf642993917c6f973da5f4"
+  "index.html": "5b3f91c66ac3251bf826ffd1737d00e44cd8a9684ea0ac880a582276e82c6761",
+  "style.css": "85f29847dbd9a9a3289981818f547926c7f03173066b9fbc5b0bac00a4aac8a8"
 }

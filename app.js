@@ -98,8 +98,9 @@
     const kind = (mobile.matches || portraitFilm.matches) ? 'mobile' : 'desktop';
     const format = desktopFilm() ? 'mp4' : (video.canPlayType('video/webm; codecs="vp9"') ? 'webm' : 'mp4');
     const key = `${kind}.${format}`;
-    if (key === mediaKey) return;
-    mediaKey = key;
+    const selection = `${mobile.matches ? 'phone' : 'wide'}-${key}`;
+    if (selection === mediaKey) return;
+    mediaKey = selection;
     revision++;
     fallbackUsed = false;
     media.classList.remove('is-playing');
@@ -108,8 +109,8 @@
     video.loop = !desktopFilm();
     video.preload = desktopFilm() ? 'auto' : 'metadata';
     targetTime = 0;
-    video.poster = desktopFilm() ? 'assets/scroll-desktop-poster.jpg' : 'assets/normal-mobile-poster.jpg';
-    video.src = desktopFilm() ? 'assets/scroll-desktop.mp4' : `assets/normal-${key}`;
+    video.poster = desktopFilm() ? 'assets/scroll-desktop-poster.jpg' : (mobile.matches ? 'assets/full-mobile-poster.jpg' : 'assets/normal-mobile-poster.jpg');
+    video.src = desktopFilm() ? 'assets/scroll-desktop.mp4' : `assets/${mobile.matches ? 'full' : 'normal'}-${key}`;
     video.load();
   }
   let previousVideoTime = 0, loopCount = 0;
