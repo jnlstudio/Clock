@@ -83,3 +83,34 @@ header{border-bottom:0;color:#283b32}
 .scroll-film .hero-copy{max-width:28%}
 .scroll-film .hero h1{font-size:clamp(36px,3.7vw,60px)}
 .scroll-film .hero .intro{font-size:12px}
+/* A stable exhibition layout: the object never scales or drifts while scrolling. */
+.product-story .story-stage{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);grid-template-rows:auto minmax(0,1fr) auto;column-gap:clamp(36px,7vw,120px);row-gap:24px;padding:clamp(32px,5svh,64px) var(--gutter);min-height:0}
+.product-story .story-heading{position:static;grid-column:1/-1;grid-row:1}
+.product-story .story-heading h2{font-size:clamp(30px,3vw,48px);margin-top:12px}
+.product-story .story-product{position:relative;grid-column:1;grid-row:2;inset:auto;width:min(100%,62svh);max-width:650px;justify-self:center;align-self:center;transform:none!important;will-change:auto}
+.product-story .story-copy{position:relative;grid-column:2;grid-row:2;inset:auto;align-self:center;min-width:0}
+.product-story .story-beat h3{font-size:clamp(36px,4vw,60px);margin:18px 0;line-height:1.12}
+.product-story .story-beat>p:last-child{max-width:34ch;line-height:1.9}
+.product-story .story-photo{position:static;grid-column:2;grid-row:3;justify-self:start;margin:0}
+.motion .product-story{height:230svh}
+.motion .product-story .story-stage{position:sticky;top:0;height:100svh;min-height:0}
+.motion .product-story .story-copy{display:grid}
+.motion .product-story .story-beat{position:relative;inset:auto;grid-area:1/1;padding:0;width:100%}
+@media(max-width:700px),(max-height:650px){
+ .motion .product-story{height:auto}
+ .motion .product-story .story-stage{position:relative;height:auto;min-height:0}
+ .motion .product-story .story-copy{display:block}
+ .motion .product-story .story-beat{opacity:1!important;transform:none!important;padding:24px 0}
+}
+@media(max-width:700px){
+ .product-story .story-stage{grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto auto auto;gap:24px;padding:56px var(--gutter)}
+ .product-story .story-heading{grid-column:1;grid-row:1}
+ .product-story .story-heading h2{font-size:32px}
+ .product-story .story-product{grid-column:1;grid-row:2;width:min(100%,400px);max-width:100%;margin:0}
+ .product-story .story-copy{grid-column:1;grid-row:3}
+ .product-story .story-beat{border-top:1px solid var(--line)}
+ .product-story .story-beat h3{font-size:36px;margin:12px 0}
+ .product-story .story-beat h3 br{display:none}
+ .product-story .story-beat>p:last-child{font-size:12px;max-width:38ch}
+ .product-story .story-photo{grid-column:1;grid-row:4}
+}

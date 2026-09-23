@@ -164,15 +164,12 @@
     heroCopy.style.opacity = String(1 - smooth(heroP) * (desktopFilm() ? 1 : .9));
     media.style.transform = 'none';
     const p = clamp((scrollY - geometry.top) / geometry.distance);
-    // Enlarge, move to the detail, then return to the whole object before release.
-    const rise = smooth(p / .55), returnToWhole = smooth((p - .73) / .27);
-    const intensity = rise * (1 - returnToWhole);
-    const scale = 1 + intensity * (mobile.matches ? .13 : .27);
-    const x = intensity * (mobile.matches ? -2 : -5);
-    const y = intensity * (mobile.matches ? 1 : 3);
-    product.style.transform = mobile.matches
-      ? `translate(-50%,-50%) translate3d(${x}%,${y}%,0) scale(${scale})`
-      : `translateY(-50%) translate3d(${x}%,${y}%,0) scale(${scale}) rotate(${intensity * -.7}deg)`;
+    // Keep the exhibit anchored; only the editorial copy changes with scroll.
+    product.style.transform = 'none';
+    if (mobile.matches) {
+      beats.forEach(el => { el.style.opacity = ''; el.style.transform = ''; el.removeAttribute('aria-hidden'); });
+      return;
+    }
     const weights = [1 - smooth((p - .20) / .07), smooth((p - .28) / .07) * (1 - smooth((p - .55) / .07)), smooth((p - .63) / .07)];
     beats.forEach((el, index) => {
       el.style.opacity = String(weights[index]);
