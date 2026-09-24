@@ -1,0 +1,86 @@
+/* The second act shares the existing film. No second video, canvas or product. */
+.hero{--act:0}
+.scene-anchor{position:absolute;top:114svh;pointer-events:none;scroll-margin-top:0}
+.editorial-scene{color:#5a3218;text-shadow:0 1px 0 #ffffff4d,0 4px 18px #502d1414}
+.editorial-scene .story-stage{display:block;min-height:0;padding:0;overflow:visible}
+.editorial-scene .story-heading h2{font-family:Georgia,'Times New Roman',serif;font-size:clamp(72px,8vw,150px);font-weight:400;line-height:.94;letter-spacing:-.04em;margin:12px 0 0;white-space:nowrap}
+.editorial-scene em{color:#a96824}
+.editorial-scene .eyebrow{color:#463223a6;font-size:10px;letter-spacing:.2em;line-height:1.6}
+.editorial-scene .story-beat{padding:0}
+.editorial-scene .story-beat h3{font-family:Georgia,'Times New Roman',serif;font-size:clamp(30px,3.5vw,54px);letter-spacing:-.035em;line-height:1.06;margin:12px 0}
+.editorial-scene .story-beat>p:last-child{font:12px/1.7 Arial,Helvetica,sans-serif;color:#3c2d23b8;max-width:420px}
+.editorial-scene .story-photo{display:flex;align-items:center;gap:20px;font:10px/1.5 Arial,Helvetica,sans-serif;letter-spacing:.16em;color:#68401f;border:0;margin:0;text-shadow:none}
+.editorial-scene .story-photo span{width:54px;height:54px;border:1px solid #68401f88;border-radius:50%;display:grid;place-items:center;font-size:26px;transition:transform .3s,border-color .3s}
+.editorial-scene .story-photo:hover span{transform:translateX(5px);border-color:#68401f}
+.editorial-motion .film-journey{height:400svh;position:relative}
+.editorial-motion .film-journey .hero{position:sticky;top:0;height:100svh;min-height:0;overflow:clip;background:#ded4c3}
+.editorial-motion .hero .hero-media{transform:scale(calc(1 - var(--act)*.20))!important;transform-origin:50% 55%;mask-image:linear-gradient(to right,rgba(0,0,0,calc(1 - var(--act))),#000 10%,#000 90%,rgba(0,0,0,calc(1 - var(--act))));-webkit-mask-image:linear-gradient(to right,rgba(0,0,0,calc(1 - var(--act))),#000 10%,#000 90%,rgba(0,0,0,calc(1 - var(--act))))}
+.editorial-motion .hero .hero-media video,.editorial-motion .hero .hero-media img{object-position:calc(100% - var(--act)*50%) center}
+.editorial-motion .hero-copy{opacity:1;transform:none;transition:none}
+.editorial-motion .editorial-scene{position:absolute;inset:0;pointer-events:none;z-index:3}
+.editorial-motion .editorial-scene .story-heading{position:absolute;top:6%;left:var(--gutter);right:var(--gutter)}
+.editorial-motion .editorial-scene .story-heading .eyebrow,.editorial-motion .editorial-scene h2{opacity:0}
+.editorial-motion .editorial-scene .story-copy{position:absolute;left:var(--gutter);bottom:5%;top:auto;right:auto;width:min(420px,45%);display:grid}
+.editorial-motion .editorial-scene .story-beat{grid-area:1/1;position:relative;inset:auto;width:100%;opacity:0}
+.editorial-motion .editorial-scene .story-photo{position:absolute;right:var(--gutter);bottom:7%;opacity:0;pointer-events:auto}
+/* Accessible static reading order when motion is disabled or unavailable. */
+body:not(.editorial-motion) .film-journey .hero{height:auto;min-height:100svh;display:block;overflow:visible}
+body:not(.editorial-motion) .editorial-scene{position:relative;margin-top:120px;padding:60px 0;background:#eee5d6}
+body:not(.editorial-motion) .editorial-scene .story-copy{display:block;position:static}
+body:not(.editorial-motion) .editorial-scene .story-beat{position:static;opacity:1;margin:30px 0}
+body:not(.editorial-motion) .editorial-scene .story-heading h2{white-space:normal;font-size:clamp(48px,7vw,110px)}
+@media(max-width:1050px){
+ .editorial-scene .story-heading h2{font-size:clamp(50px,7.8vw,82px)}
+ .editorial-scene .story-beat h3{font-size:38px}
+ .editorial-motion .hero .hero-media{transform:scale(calc(1 - var(--act)*.30))!important}
+}
+@media(max-width:700px), (min-width:701px) and (max-width:1050px) and (orientation:portrait){
+ .editorial-motion .hero-copy{opacity:calc(1 - var(--act))!important;transform:none!important}
+ .editorial-motion .hero .hero-media{transform:scale(calc(1 - var(--act)*.38))!important;transform-origin:50% 51%}
+ .editorial-motion .hero .hero-media video,.editorial-motion .hero .hero-media img{object-position:49% center}
+ .editorial-motion .editorial-scene .story-heading{top:5%}
+ .editorial-scene .story-heading h2{white-space:normal;font-size:clamp(48px,9vw,76px);line-height:.94;max-width:85%}
+ .editorial-motion .editorial-scene .story-copy{left:var(--gutter);bottom:8%;width:80%}
+ .editorial-scene .story-beat h3{font-size:34px;margin:8px 0}
+ .editorial-motion .editorial-scene .story-photo{bottom:1%;right:var(--gutter);gap:12px;font-size:9px}
+ .editorial-scene .story-photo span{width:38px;height:38px;font-size:20px}
+}
+@media(max-width:700px){
+ .editorial-motion .film-journey{height:310svh}
+ .scene-anchor{top:80svh}
+ .editorial-scene .story-heading h2{font-size:clamp(46px,12vw,70px);max-width:100%}
+ .editorial-scene .eyebrow{font-size:8px}
+ .editorial-scene .story-beat h3{font-size:30px}
+ .editorial-scene .story-beat>p:last-child{font-size:11px;line-height:1.6}
+}
+@media(max-height:650px) and (min-width:701px){
+ .editorial-scene .story-heading h2{font-size:clamp(48px,6vw,88px)}
+ .editorial-scene .story-beat h3{font-size:30px;margin:6px 0}
+ .editorial-motion .hero .hero-media{transform:scale(calc(1 - var(--act)*.28))!important}
+}
+@media(prefers-reduced-motion:reduce){.editorial-scene .story-photo span{transition:none}}
+.editorial-motion .hero .hero-media{mask-image:linear-gradient(to right,rgba(0,0,0,calc(1 - var(--act))),#000 10%,#000 90%,rgba(0,0,0,calc(1 - var(--act)))),linear-gradient(to bottom,rgba(0,0,0,calc(1 - var(--act))),#000 10%,#000 87%,rgba(0,0,0,calc(1 - var(--act))));mask-composite:intersect;-webkit-mask-image:linear-gradient(to right,rgba(0,0,0,calc(1 - var(--act))),#000 10%,#000 90%,rgba(0,0,0,calc(1 - var(--act)))),linear-gradient(to bottom,rgba(0,0,0,calc(1 - var(--act))),#000 10%,#000 87%,rgba(0,0,0,calc(1 - var(--act))));-webkit-mask-composite:source-in}
+.scene-anchor{top:150svh}
+.film-active header{position:fixed}
+.editorial-motion .editorial-scene .story-heading{top:12%}
+.editorial-scene .story-heading h2{font-size:clamp(70px,7.4vw,140px)}
+@media(max-width:1050px){.editorial-scene .story-heading h2{font-size:clamp(48px,7.4vw,78px)}}
+@media(max-width:700px){.scene-anchor{top:105svh}.editorial-motion .editorial-scene .story-heading{top:11%}.editorial-scene .story-heading h2{font-size:clamp(46px,12vw,70px)}}
+/* Finish scene geometry and isolate the editorial link from Hero CTA styling. */
+.hero .editorial-scene .story-photo{background:transparent;color:#68401f;padding:0;border:0;min-height:54px;font-size:10px;letter-spacing:.16em;text-shadow:none}
+@media(min-width:1051px){.editorial-motion .hero .hero-media{transform-origin:50% 77%}}
+@media(min-width:701px) and (max-width:1050px) and (orientation:landscape){.editorial-motion .hero .hero-media{transform-origin:50% 70%}}
+@media(max-width:700px){.hero .editorial-scene .story-photo{min-height:38px;font-size:9px}}
+/* Preserve the approved full-width mobile first act within the shared timeline. */
+@media(max-width:700px){
+ .editorial-motion .hero-copy{max-width:100%;width:100%}
+ .editorial-motion .hero h1{font-size:clamp(25px,6.7vw,30px);line-height:1.05;margin:8px 0}
+}
+@media(min-width:701px) and (max-width:1050px) and (orientation:portrait){
+ .editorial-motion .hero-copy{max-width:100%;width:100%}
+ .editorial-motion .hero h1{font-size:clamp(32px,4.1vw,42px)}
+}
+@media(max-width:700px), (min-width:701px) and (max-width:1050px) and (orientation:portrait){
+ .editorial-motion .hero .hero-media{left:calc(var(--act)*-90%);right:auto;width:calc(100% + var(--act)*180%)}
+}
+@media(max-width:700px){.editorial-motion .hero .hero-media{transform:scale(calc(1 - var(--act)*.52))!important}}

@@ -57,7 +57,7 @@
     }
   });
 
-  // Desktop follows native scroll; mobile retains normal loop playback.
+  // A single product film follows native scroll on every viewport.
   const video = $('#opening-video');
   const media = $('.hero-media');
   const toggle = $('#motion-toggle');
@@ -65,7 +65,7 @@
   let fallbackUsed = false, playPending = false;
   const motionOff = () => reduced.matches || manualPause;
   const desktopFilm = () => !mobile.matches && !portraitFilm.matches;
-  const scrollFilm = () => desktopFilm() && !motionOff();
+  const scrollFilm = () => !motionOff();
   let targetTime = 0;
   function seekFilm() {
     if (!scrollFilm() || document.hidden || dialog.open || video.readyState < 2 || video.seeking) return;
@@ -73,7 +73,7 @@
   }
   video.addEventListener('seeked', seekFilm);
   video.addEventListener('loadeddata', () => {
-    if (desktopFilm() && !motionOff()) media.classList.add('is-playing');
+    if (!motionOff()) media.classList.add('is-playing');
     schedule();
   });
   video.muted = true;
@@ -81,7 +81,7 @@
   function syncVideo() {
     if (motionOff() || !inView || document.hidden || dialog.open) { video.pause(); return; }
     if (!video.currentSrc && !video.src) loadMedia();
-    if (desktopFilm()) { video.pause(); schedule(); return; }
+    if (scrollFilm()) { video.pause(); schedule(); return; }
     if (playPending || !video.paused) return;
     const token = revision;
     playPending = true;
@@ -95,22 +95,18 @@
     }).finally(() => { playPending = false; });
   }
   function loadMedia() {
-    const kind = (mobile.matches || portraitFilm.matches) ? 'mobile' : 'desktop';
-    const format = desktopFilm() ? 'mp4' : (video.canPlayType('video/webm; codecs="vp9"') ? 'webm' : 'mp4');
-    const key = `${kind}.${format}`;
-    const selection = `${mobile.matches ? 'phone' : 'wide'}-${key}`;
-    if (selection === mediaKey) return;
-    mediaKey = selection;
+    if (mediaKey === 'editorial') return;
+    mediaKey = 'editorial';
     revision++;
     fallbackUsed = false;
     media.classList.remove('is-playing');
     video.pause();
-    video.autoplay = !desktopFilm();
-    video.loop = !desktopFilm();
-    video.preload = desktopFilm() ? 'auto' : 'metadata';
+    video.autoplay = false;
+    video.loop = false;
+    video.preload = 'auto';
     targetTime = 0;
-    video.poster = desktopFilm() ? 'assets/scroll-desktop-poster.jpg' : 'assets/full-mobile-poster.jpg';
-    video.src = desktopFilm() ? 'assets/scroll-desktop.mp4' : `assets/full-${key}`;
+    video.poster = 'assets/scroll-desktop-poster.jpg';
+    video.src = 'assets/scroll-desktop.mp4';
     video.load();
   }
   let previousVideoTime = 0, loopCount = 0;
@@ -134,80 +130,82 @@
   document.addEventListener('visibilitychange', syncVideo);
   new MutationObserver(syncVideo).observe(dialog, { attributes: true, attributeFilter: ['open'] });
 
-  // Native scroll drives transform/opacity only. Geometry is cached on resize.
-  const journey = $('.film-journey');
-  const story = $('#details'), stage = $('.story-stage'), product = $('.story-product');
-  const beats = $$('.story-beat'), heroCopy = $('.hero-copy'), heading = $('.story-heading');
+  // One sticky film and one rAF timeline for both editorial acts.
+  const journey = $('.film-journey'), scene = $('#scene-two');
+  const beats = $$('.story-beat'), heroCopy = $('.hero-copy');
+  const eyebrow = $('.story-heading .eyebrow'), heading = $('#details-title');
+  const cta = $('.story-photo'), heroBottom = $('.hero-bottom');
   const clamp = value => Math.max(0, Math.min(1, value));
   const smooth = value => { const x = clamp(value); return x * x * (3 - 2 * x); };
   let geometry, frame = 0;
   function measure() {
-    geometry = { filmTop: journey.getBoundingClientRect().top + scrollY, filmDistance: Math.max(1, journey.offsetHeight - $('#top').offsetHeight), top: story.getBoundingClientRect().top + scrollY, distance: Math.max(1, story.offsetHeight - stage.offsetHeight), heroHeight: $('#top').offsetHeight };
+    geometry = { top: journey.getBoundingClientRect().top + scrollY, distance: Math.max(1, journey.offsetHeight - $('#top').offsetHeight) };
     schedule();
   }
-  function resetStory() {
-    [product, heading, media, heroCopy, ...beats].forEach(el => { el.style.transform = ''; el.style.opacity = ''; });
-    beats.forEach(el => el.removeAttribute('aria-hidden'));
+  function reveal(el, value, distance = 30) {
+    el.style.opacity = String(value);
+    el.style.transform = `translate3d(0,${(1-value)*distance}px,0)`;
   }
   function render() {
     frame = 0;
     if (motionOff() || !geometry) return;
-    if (desktopFilm()) {
-      const progress = clamp((scrollY - geometry.filmTop) / geometry.filmDistance);
-      if (Number.isFinite(video.duration)) {
-        targetTime = progress * Math.max(0, video.duration - 1 / 24);
-        seekFilm();
-      }
-    }
-    if (short.matches) return;
-    const heroP = desktopFilm() ? clamp((scrollY - geometry.filmTop) / (geometry.filmDistance * .3)) : clamp(scrollY / geometry.heroHeight);
-    heroCopy.style.transform = `translate3d(0,${-heroP * (mobile.matches ? 12 : 40)}px,0)`;
-    heroCopy.style.opacity = String(1 - smooth(heroP) * (desktopFilm() ? 1 : .9));
-    media.style.transform = 'none';
     const p = clamp((scrollY - geometry.top) / geometry.distance);
-    // Keep the exhibit anchored; only the editorial copy changes with scroll.
-    product.style.transform = 'none';
-    if (mobile.matches) {
-      beats.forEach(el => { el.style.opacity = ''; el.style.transform = ''; el.removeAttribute('aria-hidden'); });
-      return;
+    journey.dataset.progress = p.toFixed(4);
+    document.body.classList.toggle('film-active',scrollY < geometry.top + geometry.distance);
+    if (Number.isFinite(video.duration)) {
+      targetTime = p * Math.max(0, video.duration - 1 / 24);
+      seekFilm();
     }
-    const weights = [1 - smooth((p - .20) / .07), smooth((p - .28) / .07) * (1 - smooth((p - .55) / .07)), smooth((p - .63) / .07)];
-    beats.forEach((el, index) => {
-      el.style.opacity = String(weights[index]);
-      el.style.transform = `translate3d(0,${(1 - weights[index]) * 12}px,0)`;
-      el.setAttribute('aria-hidden', String(weights[index] < .5));
+    const transition = smooth((p - .18) / .20);
+    const first = 1 - smooth((p - .18) / .14);
+    reveal(heroCopy, first, -30);
+    heroCopy.inert = first < .02;
+    heroCopy.setAttribute('aria-hidden', String(first < .02));
+    reveal(heroBottom, first, 0);
+    heroBottom.inert = first < .02;
+    scene.inert = transition < .02;
+    scene.setAttribute('aria-hidden', String(transition < .02));
+    $('#top').style.setProperty('--act', transition.toFixed(4));
+    reveal(eyebrow, smooth((p - .22) / .10), 16);
+    reveal(heading, smooth((p - .25) / .13), 40);
+    const intro = smooth((p - .36) / .10);
+    const weights = [1-smooth((p-.59)/.05),smooth((p-.65)/.05)*(1-smooth((p-.78)/.05)),smooth((p-.84)/.05)];
+    beats.forEach((el,i) => {
+      reveal(el, intro * weights[i], 18);
+      el.setAttribute('aria-hidden', String(intro * weights[i] < .5));
     });
+    reveal(cta, smooth((p - .43) / .08), 12);
+    cta.inert = p < .44;
   }
   function schedule() { if (!frame) frame = requestAnimationFrame(render); }
   function applyMotion() {
-    const enabled = !motionOff() && !short.matches;
+    const enabled = !motionOff();
     document.body.classList.toggle('motion', enabled);
-    document.body.classList.toggle('scroll-film', scrollFilm());
-    toggle.textContent = reduced.matches ? 'Reduced motion enabled' : (motionOff() ? 'Resume motion' : 'Pause motion');
-    toggle.setAttribute('aria-pressed', String(motionOff()));
-    if (!enabled) resetStory();
-    if (!motionOff()) loadMedia();
+    document.body.classList.toggle('scroll-film', enabled);
+    document.body.classList.toggle('editorial-motion', enabled);
+    toggle.textContent = reduced.matches ? 'Reduced motion enabled' : (enabled ? 'Pause motion' : 'Resume motion');
+    toggle.setAttribute('aria-pressed', String(!enabled));
+    if (!enabled) {
+      document.body.classList.remove('film-active');
+      [heroCopy,heroBottom,eyebrow,heading,cta,...beats].forEach(el => { el.style.opacity='';el.style.transform='';el.inert=false;el.removeAttribute('aria-hidden'); });
+      scene.inert=false;scene.removeAttribute('aria-hidden');
+      $('#top').style.setProperty('--act','0');
+    }
+    if (enabled) loadMedia();
     syncVideo();
     measure();
   }
   toggle.addEventListener('click', () => {
-    // A system reduced-motion setting is never overridden by page controls.
-    if (reduced.matches) {
-      $('#film-status').textContent = 'Reduced motion is enabled in your device settings.';
-      toggle.textContent = 'Reduced motion enabled';
-      return;
-    }
-    if (!manualPause && toggle.textContent === 'Resume motion') { syncVideo(); toggle.textContent = 'Pause motion'; return; }
+    if (reduced.matches) return;
     manualPause = !manualPause;
     applyMotion();
   });
   reduced.addEventListener('change', applyMotion);
-  mobile.addEventListener('change', () => { if (!motionOff()) loadMedia(); applyMotion(); });
-  short.addEventListener('change', applyMotion);
+  mobile.addEventListener('change', applyMotion);
   portraitFilm.addEventListener('change', applyMotion);
-  addEventListener('scroll', schedule, { passive: true });
-  addEventListener('resize', measure, { passive: true });
-  new ResizeObserver(measure).observe(story);
+  addEventListener('scroll', schedule, { passive:true });
+  addEventListener('resize', measure, { passive:true });
+  new ResizeObserver(measure).observe(journey);
   const reveals = new IntersectionObserver(entries => entries.forEach(entry => {
     if (entry.isIntersecting) { entry.target.classList.add('visible'); reveals.unobserve(entry.target); }
   }), { threshold: .08 });

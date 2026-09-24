@@ -1,3 +1,26 @@
+# Tile Time — Editorial 第二幕（2026-09-24）
+
+本次沿用現有 HTML/CSS/JavaScript 與同一條產品影片，保留第一幕內容，將產品介紹融合成連續第二幕。沒有 React、TypeScript、Canvas 或 160 張 image sequence；沒有 npm build 步驟。
+
+## 本次檔案
+- index.html：同一 sticky Hero 內的第二幕 HTML，保留產品、選款、圖片放大、複製及 FAQ。
+- scene.css：第二幕古銅金襯線標題、中央產品、底部簡介及 outline DISCOVER；桌面、手機、平板構圖。
+- app.js：單一 rAF scroll timeline，影片與獨立 HTML 文字同步；降低動態效果及暫停時顯示完整靜態內容。
+- entry.js / style.css / 產品 assets 保留；poster 統一為影片首格。
+
+## 時間線
+0–18% 第一幕；18–38% 過渡；38% 標題完整；36–46% 簡介出現；43–51% DISCOVER 出現；51–58% 第二幕全顯示。其後保留木框及指針介紹，最後進入產品 collection。
+單一 scroll-desktop.mp4：10 秒、24fps、240 格，scroll 0–1 映射 0–9.958 秒。第二幕 38–58% 約 3.78–5.78 秒，零起算格索引約 90–138。並非 160 張圖片序列。
+手機採相同影片與時間線以保持產品連續，捲動區為 310svh；其他尺寸 400svh。手機標題兩行，產品縮小保留完整鐘框，簡介在下方。既有導航保留實際產品入口，沒有新增不存在的 Services/Contact 頁面。
+
+## 執行與交付
+純靜態網站，於本資料夾執行 python3 -m http.server 8000 後開啟 http://localhost:8000。
+上傳本資料夾完整內容至 Clock repository 根目錄，必須包含新增 scene.css，以及 index.html、app.js、style.css、entry.js、完整 assets/。
+本次未發布線上網站。驗證結果見 VERIFICATION.md。
+
+---
+以下為舊版修改紀錄；目前行為以上述說明為準。
+
 ## 第二節固定展示修訂
 產品改為固定尺寸及位置，取消 scroll scale / rotate / translate；桌面以 Grid 對齊產品、文字及 CTA，保留文字淡入淡出，捲動區縮至 230svh。手機與矮螢幕採正常內容流，依次顯示全部介紹。
 已實測 1440×900、390×844 排版，產品 transform=none，無橫向 overflow；手機三段介紹均無 aria-hidden，console 無錯誤。動畫及開頁位置回歸測試通過。第一屏影片未修改。
