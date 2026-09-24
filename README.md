@@ -1,3 +1,6 @@
+## 收尾文字構圖修訂
+Good times. 置頂，Beautiful little things. 移至左下；原文不變。加深古銅色與細微奶油亮邊，闊螢幕保留至少 0.625 × 寬度的構圖高度，避免鐘框與標題重疊。手機使用獨立字級及下方入口。桌面及手機預覽通過，手機無橫向溢出，console 無 error/warning。
+
 ## 暖光收尾畫面更新
 保留底部 Good times. / Beautiful little things.、標語、產品入口及頁尾功能。新增使用者提供的 closing-scene.png，以古銅襯線文字、細圈箭頭及手機／平板獨立裁圖呈現；首頁與第二幕未改動。
 
