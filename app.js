@@ -17,9 +17,7 @@
     selected = key;
     const design = designs[key];
     $('#selected-name').textContent = design.name;
-    $('#selected-image').src = design.file;
-    $('#selected-image').alt = `${design.name} floral clock product visual`;
-    $('#selected-caption').textContent = design.caption;
+    $$('[data-select]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.select === key)));
     $$('[data-shape]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.shape === key)));
     $('#copy-status').textContent = '';
   }

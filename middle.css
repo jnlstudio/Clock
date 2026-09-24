@@ -1,0 +1,47 @@
+/* Scoped middle chapter; opening timeline and closing campaign are unchanged. */
+.collection{padding-top:76px;padding-bottom:36px}
+.collection .section-heading{margin:48px 0 40px;align-items:center;gap:60px}
+.collection .section-heading h2,.collection #choose-title,.faq h2{font-family:Didot,'Bodoni MT','Times New Roman',serif;color:#482509;font-weight:400;letter-spacing:-.035em}
+.collection .section-heading h2{font-size:clamp(42px,4.5vw,70px);line-height:1.04}
+.collection em,.faq em{color:#915319}
+.collection .section-heading p{max-width:300px;font-size:13px}
+.collection .product-grid{gap:clamp(28px,4vw,64px);align-items:start}
+.collection .round-card{padding-top:0}
+.collection .photo-button{aspect-ratio:1.15;}
+.collection .photo-button img{object-fit:cover}
+.collection .zoom{background:#eee5d6eb;color:#482509;font-size:10px;padding:10px 13px}
+.collection .card-info{align-items:flex-end;gap:15px;padding-top:20px}
+.collection .card-info h3{font:400 clamp(30px,3vw,44px)/1.1 Didot,'Bodoni MT','Times New Roman',serif;color:#482509}
+.collection .card-info .eyebrow{letter-spacing:.12em;font-size:8px}
+.collection .circle-button{font-size:11px;white-space:nowrap;border-bottom:1px solid #68401f55;padding:10px 0;min-height:44px;color:#68401f}
+.collection .circle-button span{margin-left:12px}
+.collection .circle-button[aria-pressed=true]{border-bottom-color:#68401f}
+.collection .card-description{margin-top:12px;font-size:12px}
+.collection .choose{padding:34px 0 0;margin-top:44px;border-top:1px solid #68401f33;scroll-margin-top:35px}
+.collection .choose-grid{display:block;margin:0}
+.collection .choose-grid>div{display:grid;grid-template-columns:1fr 1fr;gap:0 8%;align-items:start}
+.collection .choose .eyebrow{grid-column:1;grid-row:1}
+.collection #choose-title{grid-column:1;grid-row:2;font-size:clamp(32px,3.1vw,48px);margin:12px 0;max-width:430px;line-height:1.08}
+.collection .choose-intro{grid-column:1;grid-row:3}
+.collection .shape-selector{grid-column:1;grid-row:4;margin:15px 0}
+.collection dl{grid-column:2;grid-row:1/5;margin:0}
+.collection dl div{padding:12px 0}
+.collection #copy{grid-column:2;grid-row:5;justify-self:start;margin-top:8px;border:0;border-bottom:1px solid #68401f66;padding:8px 0;min-height:44px;color:#68401f}
+.collection .selected-detail{grid-column:1;grid-row:5;justify-self:start;margin:0;font-size:11px;color:#68401f}
+.collection #copy-status{grid-column:2;grid-row:6;min-height:32px}
+.faq{padding-top:48px;padding-bottom:72px;gap:8%;border-top:0}
+.faq h2{font-size:clamp(34px,3.6vw,54px);line-height:1.06}
+.faq summary{font-size:12px;min-height:56px;padding:16px 0}
+@media(max-width:700px){
+ .collection{padding-top:50px;padding-bottom:24px}
+ .collection .section-heading{margin:32px 0}
+ .collection .section-heading h2{font-size:42px}
+ .collection .product-grid{gap:36px}
+ .collection .photo-button{aspect-ratio:1}
+ .collection .choose{margin-top:36px;padding-top:28px}
+ .collection .choose-grid>div{display:flex;flex-direction:column;gap:0}
+ .collection #choose-title{font-size:36px}
+ .collection dl{width:100%;margin:8px 0}
+ .collection #copy{order:1}.collection .selected-detail{order:2}.collection #copy-status{order:3}
+ .faq{padding-top:30px;padding-bottom:50px;gap:24px}
+}
