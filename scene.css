@@ -137,3 +137,21 @@ body>footer{background:#eee0cb;color:#68401f;border-color:#68401f33}
  .closing-campaign{height:max(100svh,62.5vw);max-height:none}
  .closing-campaign .closing-main-title{font-size:clamp(76px,7.6vw,142px)}
 }
+/* Reference typography: fine, high-contrast serif and restrained bronze. */
+.closing-campaign .closing-main-title,
+.closing-campaign #closing-title em{
+ font-family:Didot,'Bodoni MT','Times New Roman',serif;
+ font-weight:400;
+ letter-spacing:-.035em;
+ text-shadow:0 1px 0 rgba(255,248,228,.85),0 3px 12px rgba(77,42,15,.07);
+}
+.closing-campaign .closing-main-title{color:#482509}
+.closing-campaign #closing-title em{color:#915319;letter-spacing:-.03em}
+@media(min-width:1051px){
+ .closing-campaign .closing-main-title{font-size:clamp(78px,8.1vw,148px)}
+ .closing-campaign #closing-title em{font-size:clamp(34px,4vw,66px)}
+}
+@media(max-width:700px){
+ .closing-campaign .closing-main-title{font-size:clamp(48px,13.5vw,74px)}
+ .closing-campaign #closing-title em{font-size:clamp(27px,7.8vw,42px)}
+}
