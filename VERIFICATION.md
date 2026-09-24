@@ -1,3 +1,6 @@
+## 收尾畫面檢查
+1440×900、390×844、820×1180 瀏覽器尺寸檢查；背景載入正常，手機和平板無橫向溢出，產品入口維持 #collection。只修改 index.html、scene.css 並新增背景資產，app.js 未改動。
+
 # 第二幕驗證 — 2026-09-24
 
 - JavaScript 語法檢查通過，靜態網站可由本機 HTTP 啟動；不適用 TypeScript/npm build。
