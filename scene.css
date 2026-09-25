@@ -96,7 +96,7 @@ body:not(.editorial-motion) .editorial-scene .story-heading h2{white-space:norma
 .closing-campaign .closing-discover{position:absolute;bottom:6%;right:var(--gutter);display:flex;align-items:center;gap:20px;color:#5a3218;font-size:11px;letter-spacing:.08em;min-height:52px;border:0;margin:0;padding:0;text-shadow:0 1px 0 #fff8e580}
 .closing-campaign .closing-discover span{display:grid;place-items:center;width:52px;height:52px;border:1px solid #68401f99;border-radius:50%;font-size:25px;transition:transform .3s,border-color .3s}
 .closing-campaign .closing-discover:hover span{transform:translateX(5px);border-color:#68401f}
-body>footer{background:#eee0cb;color:#68401f;border-color:#68401f33}
+body>footer{margin-inline:0;padding-inline:var(--gutter);background:#eee0cb;color:#68401f;border-color:#68401f33}
 @media(max-width:1050px) and (orientation:portrait){
  .closing-campaign{height:90svh;min-height:800px}
  .closing-campaign .closing-backdrop{top:20%;height:66%}
