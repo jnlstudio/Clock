@@ -12,21 +12,45 @@
   };
   let selected = 'square';
   const dialog = $('#photo-dialog');
-  let opener;
+  let opener, galleryKey = 'square';
   function select(key) {
     selected = key;
     const design = designs[key];
     $('#selected-name').textContent = design.name;
     $$('[data-select]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.select === key)));
-    $$('[data-shape]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.shape === key)));
+  $$('[data-shape]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.shape === key)));
     $('#copy-status').textContent = '';
   }
+    function updateGallery() {
+    const design = designs[galleryKey];
+    $('#dialog-title').textContent = design.name;
+    $('#dialog-image').src = design.file;
+    $('#dialog-image').alt = `Enlarged ${design.name} floral clock product visual`;
+    $('#photo-position').textContent = galleryKey === 'square' ? '01 / 02' : '02 / 02';
+    $('#photo-description').textContent = galleryKey === 'square'
+      ? 'A floral centrepiece, framed by gently rounded corners.'
+      : 'A repeating floral rhythm, held in a circular silhouette.';
+  }
+  function stepGallery() {
+    galleryKey = galleryKey === 'square' ? 'round' : 'square';
+    updateGallery();
+  }
+  $('#photo-previous').addEventListener('click', stepGallery);
+  $('#photo-next').addEventListener('click', stepGallery);
+  dialog.addEventListener('keydown', event => {
+    if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+      event.preventDefault(); stepGallery();
+    }
+  });
+
   function openPhoto(key, trigger) {
     const design = designs[key];
+    galleryKey = key;
     opener = trigger;
     $('#dialog-title').textContent = design.name;
     $('#dialog-image').src = design.file;
     $('#dialog-image').alt = `Enlarged ${design.name} floral clock product visual`;
+    updateGallery();
     dialog.showModal();
   }
   $$('[data-shape]').forEach(button => button.addEventListener('click', () => select(button.dataset.shape)));
