@@ -45,3 +45,32 @@
  .collection #copy{order:1}.collection .selected-detail{order:2}.collection #copy-status{order:3}
  .faq{padding-top:30px;padding-bottom:50px;gap:24px}
 }
+
+/* Quality pass: readable supporting copy, precise controls, quiet feedback. */
+.collection .card-description,.collection .choose-intro{font-size:14px;line-height:1.75;max-width:46ch}
+.collection .section-heading p{font-size:14px;line-height:1.8}
+.collection .card-info .eyebrow{font-size:10px;letter-spacing:.12em}
+.collection .shape-selector button{position:relative;padding-inline:5px;min-width:88px;transition:color .2s,border-color .2s}
+.collection .shape-selector button[aria-pressed=true]{color:#482509;border-bottom:2px solid #754315}
+.collection .circle-button span{display:inline-block;transition:transform .25s}
+.collection .circle-button:hover span,.collection .circle-button:focus-visible span{transform:translateX(4px)}
+.collection .circle-button[aria-pressed=true]{color:#482509;border-bottom:2px solid #754315}
+.collection .photo-button:focus-visible{outline:2px solid #754315;outline-offset:5px}
+.collection .photo-button:focus-visible img{transform:scale(1.025)}
+.collection .selected-detail,.collection #copy{font-size:12px}
+.faq summary{font-size:14px;line-height:1.6;transition:color .2s}
+.faq summary:hover,.faq details[open] summary{color:#754315}
+.faq details p{font-size:13px;line-height:1.85;max-width:65ch}
+.faq summary span{transition:transform .25s}
+@media(min-width:701px) and (max-width:950px){
+ .collection .card-info{align-items:flex-start;flex-direction:column;gap:8px}
+ .collection .section-heading{gap:30px}
+}
+@media(max-width:380px){
+ .collection .card-info{align-items:flex-start;flex-direction:column;gap:8px}
+ .collection .section-heading h2{font-size:36px}
+}
+@media(prefers-reduced-motion:reduce){
+ .collection .photo-button img,.collection .circle-button span,.collection .shape-selector button,.faq summary,.faq summary span{transition:none}
+ .collection .photo-button:hover img,.collection .photo-button:focus-visible img,.collection .circle-button:hover span,.collection .circle-button:focus-visible span{transform:none}
+}
