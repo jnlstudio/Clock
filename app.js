@@ -18,11 +18,12 @@
     const design = designs[key];
     $('#selected-name').textContent = design.name;
     $$('[data-select]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.select === key)));
-  $$('[data-shape]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.shape === key)));
+    $$('[data-shape]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.shape === key)));
     $('#copy-status').textContent = '';
   }
-    function updateGallery() {
+  function updateGallery() {
     const design = designs[galleryKey];
+    $('#gallery-select').firstChild.textContent = `Choose ${design.name} `;
     $('#dialog-title').textContent = design.name;
     $('#dialog-image').src = design.file;
     $('#dialog-image').alt = `Enlarged ${design.name} floral clock product visual`;
@@ -37,6 +38,12 @@
   }
   $('#photo-previous').addEventListener('click', stepGallery);
   $('#photo-next').addEventListener('click', stepGallery);
+  $('#gallery-select').addEventListener('click', () => {
+    select(galleryKey);
+    opener = $(`[data-shape="${selected}"]`);
+    dialog.close();
+    $('#choose').scrollIntoView({ behavior: reduced.matches ? 'instant' : 'smooth' });
+  });
   dialog.addEventListener('keydown', event => {
     if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
       event.preventDefault(); stepGallery();

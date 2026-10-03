@@ -1,3 +1,17 @@
+# Product story update — 2026-10-03
+
+The existing opening animation, closing visual and app.js are unchanged (byte/section comparison against the pre-edit backup). Only the middle content and scoped middle.css were rebuilt.
+
+Sequence: introduction; large Square/Round comparison; three photographic detail stories; two existing lifestyle photographs; specifications; product choice. Existing FAQ, selection, copy-details and gallery functions remain.
+
+All eight unverified specification fields say “To be confirmed”. Material descriptions refer only to wood-tone/gold-tone appearance. Lifestyle photographs show each design separately; no invented combined photograph or product measurement is used.
+
+Below-fold photography uses local WebP derivatives, responsive sources where appropriate, lazy loading and CSS aspect ratios. No dependencies were added.
+
+Validation: JavaScript syntax check passed. Existing mocked motion and entry-navigation regression checks passed. Browser inspection at 1440×900, 834×1112, 390×844 and 375×812 found no horizontal overflow; tested Square/Round selection, Explore navigation, gallery opening and Escape dismissal. No console warnings/errors were observed. Original opening/closing source preservation verified; this is not an actual-device Safari certification or a measured Lighthouse/CLS score.
+
+This is a static site with no React/TypeScript compilation or npm build step. Relative asset references and duplicate IDs checked. Ready for the existing GitHub Pages file deployment; not uploaded or published by this update.
+
 ## 2026-09-25 中段精簡
 新增 middle.css，只作用 collection、內嵌選款及 FAQ。兩款產品並排；移除獨立選款大圖，保留選款、放大與複製。收緊留白、統一古銅襯線字型。首尾 HTML、scene.css 和影片捲動時間線保持不變，已逐段比較確認。桌面1440×900與手機390×844預覽、款式切換、圖片視窗、複製和FAQ通過；無橫向溢出及console錯誤。動畫與入口回歸測試通過，靜態網站毋須編譯。上傳時包含新增 middle.css。
 
