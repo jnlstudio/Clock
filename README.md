@@ -1,3 +1,7 @@
+## 2026-10-04 — Completed design information
+
+Replaced the eight unconfirmed specification placeholders with six visually supported design attributes: silhouettes, wood-tone frame appearance, floral face, palette, gold-tone hands and four hour accents. Renamed the eyebrow to DESIGN AT A GLANCE and removed the unfinished-status introduction. No estimated dimensions, weight, movement, power or mounting claims were published. Desktop and mobile browser layout inspected; mobile has no horizontal overflow. Opening, closing, CSS and JavaScript unchanged in this update. Not deployed.
+
 # Product story update — 2026-10-03
 
 The existing opening animation, closing visual and app.js are unchanged (byte/section comparison against the pre-edit backup). Only the middle content and scoped middle.css were rebuilt.
